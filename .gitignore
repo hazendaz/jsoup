@@ -11,3 +11,5 @@ bin/
 .vscode/
 .java-version
 .DS_Store
+*.releaseBackup
+release.properties
