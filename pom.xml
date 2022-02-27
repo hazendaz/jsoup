@@ -228,6 +228,7 @@
         </executions>
         <configuration>
           <parallel>methods</parallel>
+          <skip>true</skip>
           <threadCount>8</threadCount>
         </configuration>
       </plugin>
