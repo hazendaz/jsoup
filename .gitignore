@@ -9,3 +9,5 @@ target/
 *Thrash*
 bin/
 .vscode/
+*.releaseBackup
+release.properties
