@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <name>jsoup Java HTML Parser</name>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-  <groupId>org.jsoup</groupId>
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.github.hazendaz</groupId>
+    <artifactId>base-parent</artifactId>
+    <version>31</version>
+    <relativePath />
+  </parent>
+
+  <groupId>com.github.hazendaz.jsoup</groupId>
   <artifactId>jsoup</artifactId>
   <version>1.15.1-SNAPSHOT</version><!-- remember to update previous version below for japicmp -->
+  <name>jsoup</name>
+
   <description>jsoup is a Java library for working with real-world HTML. It provides a very convenient API for fetching URLs and extracting and manipulating data, using the best of HTML5 DOM methods and CSS selectors. jsoup implements the WHATWG HTML5 specification, and parses HTML to the same DOM as modern browsers do.</description>
   <url>https://jsoup.org/</url>
   <inceptionYear>2009</inceptionYear>
+
   <issueManagement>
     <system>GitHub</system>
     <url>https://github.com/jhy/jsoup/issues</url>
@@ -22,8 +32,8 @@
   </licenses>
   <scm>
     <url>https://github.com/jhy/jsoup</url>
-    <connection>scm:git:https://github.com/jhy/jsoup.git</connection>
-    <!-- <developerConnection>scm:git:git@github.com:jhy/jsoup.git</developerConnection> -->
+    <connection>scm:git:ssh://git@github.com/hazendaz/jsoup.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/hazendaz/jsoup.git</developerConnection>
     <tag>HEAD</tag>
   </scm>
   <organization>
@@ -42,15 +52,10 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.9.0</version>
         <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
-          <encoding>UTF-8</encoding>
-          <compilerArgs>
+          <compilerArgs combine.children="append">
             <!-- saves output for package-info.java, so mvn sees it has completed it, so incremental compile works -->
             <arg>-Xpkginfo:always</arg>
           </compilerArgs>
-          <!-- this means incremental = true... -->
-          <useIncrementalCompilation>false</useIncrementalCompilation>
         </configuration>
       </plugin>
       <plugin>
@@ -73,8 +78,8 @@
               </signature>
               <signature>
                 <groupId>net.sf.androidscents.signature</groupId>
-                <artifactId>android-api-level-10</artifactId>
-                <version>2.3.3_r2</version>
+                <artifactId>android-api-level-28</artifactId>
+                <version>9_r6</version>
               </signature>
             </configuration>
           </execution>
@@ -161,7 +166,7 @@
       </plugin>
       <plugin>
         <artifactId>maven-release-plugin</artifactId>
-        <version>2.5.3</version>
+        <version>3.0.0-M5</version>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -169,7 +174,7 @@
         <version>3.0.0-M5</version>
         <configuration>
           <!-- smaller stack to find stack overflows -->
-          <argLine>-Xss256k</argLine>
+          <argLine>${argLine} -Xss256k</argLine>
         </configuration>
       </plugin>
       <plugin>
@@ -346,18 +351,13 @@
     </dependency>
 
     <dependency>
-      <!-- javax.annotations.nonnull, with Apache 2 (not GPL) license. Build time only. -->
-      <groupId>com.google.code.findbugs</groupId>
-      <artifactId>jsr305</artifactId>
-      <version>3.0.2</version>
+      <!-- javax.annotations.nonnull, with Apache 2 (not GPL) license. Build time only. (TODO: Move any annotations off jsr305 which is transient here to spotbugs annotations instead. -->
+      <groupId>com.github.spotbugs</groupId>
+      <artifactId>spotbugs-annotations</artifactId>
+      <version>4.5.3</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>
-
-  <dependencyManagement>
-    <dependencies>
-    </dependencies>
-  </dependencyManagement>
 
   <developers>
     <developer>
