@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <name>jsoup Java HTML Parser</name>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-  <groupId>org.jsoup</groupId>
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.github.hazendaz</groupId>
+    <artifactId>base-parent</artifactId>
+    <version>54</version>
+    <relativePath />
+  </parent>
+
+  <groupId>com.github.hazendaz.jsoup</groupId>
   <artifactId>jsoup</artifactId>
   <version>1.22.1-SNAPSHOT</version><!-- remember to update previous version below for japicmp -->
-  <url>https://jsoup.org/</url>
+
+  <name>jsoup</name>
   <description>jsoup is a Java library that simplifies working with real-world HTML and XML. It offers an easy-to-use API for URL fetching, data parsing, extraction, and manipulation using DOM API methods, CSS, and xpath selectors. jsoup implements the WHATWG HTML5 specification, and parses HTML to the same DOM as modern browsers.</description>
+  <url>https://jsoup.org/</url>
   <inceptionYear>2009</inceptionYear>
+
   <issueManagement>
     <system>GitHub</system>
     <url>https://github.com/jhy/jsoup/issues</url>
@@ -22,8 +32,8 @@
   </licenses>
   <scm>
     <url>https://github.com/jhy/jsoup</url>
-    <connection>scm:git:https://github.com/jhy/jsoup.git</connection>
-    <!-- <developerConnection>scm:git:git@github.com:jhy/jsoup.git</developerConnection> -->
+    <connection>scm:git:ssh://git@github.com/hazendaz/jsoup.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/hazendaz/jsoup.git</developerConnection>
     <tag>HEAD</tag>
   </scm>
   <organization>
@@ -43,9 +53,8 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.14.0</version>
         <configuration>
-          <encoding>UTF-8</encoding>
-          <useIncrementalCompilation>false</useIncrementalCompilation>
-          <compilerArgs>
+          <compilerArgs combine.children="append">
+            <!-- saves output for package-info.java, so mvn sees it has completed it, so incremental compile works -->
             <arg>-Xpkginfo:always</arg>
           </compilerArgs>
         </configuration>
@@ -252,7 +261,7 @@
         <version>3.5.4</version>
         <configuration>
           <!-- smaller stack to find stack overflows. Was 256, but Zulu on MacOS ARM needs >= 640 -->
-          <argLine>-Xss640k</argLine>
+          <argLine>${argLine} -Xss640k</argLine>
         </configuration>
       </plugin>
       <plugin>
@@ -544,12 +553,8 @@
       <version>1.0.0</version>
       <scope>provided</scope>
     </dependency>
-  </dependencies>
 
-  <dependencyManagement>
-    <dependencies>
-    </dependencies>
-  </dependencyManagement>
+  </dependencies>
 
   <developers>
     <developer>
